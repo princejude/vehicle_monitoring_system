@@ -1,0 +1,53 @@
+/* Navbar Styling */
+.navbar {
+    background-color: #333;
+    overflow: hidden;
+    margin-bottom: 20px;
+    padding: 0;
+}
+
+.nav-tabs {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.nav-tabs li {
+    flex: 1;
+}
+
+.nav-tabs li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav-tabs li a:hover {
+    background-color: #575757;
+}
+
+.nav-tabs li a.active {
+    background-color: #04AA6D;
+    color: white;
+}
+
+table th, table td {
+    vertical-align: middle;
+}
+
+table tr:hover {
+    background-color: #f5f5f5; /* Light gray hover effect */
+}
+
+.text-danger {
+    color: #dc3545; /* Bootstrap red */
+}
+
+.text-success {
+    color: #198754; /* Bootstrap green */
+}
+

@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Vehicle List</h2>
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <!-- Search and Filter -->
+            <form method="GET" action="{{ url_for('vehicle_bp.view_vehicles') }}" class="row g-3 mb-4">
+                <div class="col-md-6">
+                    <input type="text" name="search" class="form-control" placeholder="Search by plate number or owner name" value="{{ request.args.get('search', '') }}">
+                </div>
+                <div class="col-md-4">
+                    <select name="vehicle_type" class="form-select">
+                        <option value="">Filter by Vehicle Type</option>
+                        <option value="car" {% if request.args.get('vehicle_type') == 'car' %}selected{% endif %}>Car</option>
+                        <option value="truck" {% if request.args.get('vehicle_type') == 'truck' %}selected{% endif %}>Truck</option>
+                        <option value="bus" {% if request.args.get('vehicle_type') == 'bus' %}selected{% endif %}>Bus</option>
+                        <option value="motorbike" {% if request.args.get('vehicle_type') == 'motorbike' %}selected{% endif %}>Motorbike</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary w-100">Search</button>
+                </div>
+            </form>
+            
+            <!-- Vehicle Table -->
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Plate Number</th>
+                            <th>Vehicle Type</th>
+                            <th>Status</th>
+                            <th>Owner Name</th>
+                            <th>Phone Number</th>
+                            <th>Address</th>
+                            <th>Date Added</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if vehicles %}
+                            {% for vehicle in vehicles %}
+                                <tr>
+                                    <td>{{ vehicle.plate_number }}</td>
+                                    <td>{{ vehicle.vehicle_type }}</td>
+                                    <td>{{ vehicle.status }}</td>
+                                    <td>{{ vehicle.owner_name }}</td>
+                                    <td>{{ vehicle.phone_number }}</td>
+                                    <td>{{ vehicle.address }}</td>
+                                    <td>{{ vehicle.date_added.strftime('%Y-%m-%d') }}</td>
+                                    <td>
+                                        <a href="{{ url_for('vehicle_bp.edit_vehicle', vehicle_id=vehicle.id) }}" class="btn btn-sm btn-warning">Edit</a>
+                                        <a href="{{ url_for('vehicle_bp.delete_vehicle', vehicle_id=vehicle.id) }}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this vehicle?')">Delete</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td colspan="8" class="text-center">No vehicles found.</td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Pagination -->
+            <nav aria-label="Vehicle list pagination">
+                <ul class="pagination justify-content-center">
+                    {% if pagination.has_prev %}
+                        <li class="page-item">
+                            <a class="page-link" href="{{ url_for('vehicle_bp.view_vehicles', page=pagination.prev_num, **request.args) }}" aria-label="Previous">
+                                &laquo; Previous
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <span class="page-link">&laquo; Previous</span>
+                        </li>
+                    {% endif %}
+                    
+                    {% for page_num in pagination.iter_pages(left_edge=2, right_edge=2, left_current=2, right_current=2) %}
+                        {% if page_num %}
+                            {% if page_num == pagination.page %}
+                                <li class="page-item active"><span class="page-link">{{ page_num }}</span></li>
+                            {% else %}
+                                <li class="page-item"><a class="page-link" href="{{ url_for('vehicle_bp.view_vehicles', page=page_num, **request.args) }}">{{ page_num }}</a></li>
+                            {% endif %}
+                        {% else %}
+                            <li class="page-item disabled"><span class="page-link">…</span></li>
+                        {% endif %}
+                    {% endfor %}
+                    
+                    {% if pagination.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="{{ url_for('vehicle_bp.view_vehicles', page=pagination.next_num, **request.args) }}" aria-label="Next">
+                                Next &raquo;
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <span class="page-link">Next &raquo;</span>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+{% endblock %}

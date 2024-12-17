@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Processed Images</title>
+</head>
+<body>
+    <h1>Processed Images</h1>
+    <ul>
+        {% for img in images %}
+            <li>
+                <img src="{{ img }}" alt="Processed Image" style="width: 300px; height: auto;">
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

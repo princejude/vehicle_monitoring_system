@@ -1,0 +1,51 @@
+road_safety/
+│
+├── app/                              # Main application directory
+│   ├── __init__.py                   # Initialize the Flask app
+│   ├── config.py                     # Configuration settings (e.g., database, API keys)
+│   ├── routes.py                     # Web routes for the portal
+│   ├── forms.py                      # Forms for adding and managing vehicles
+│   ├── models.py                     # SQLAlchemy ORM models
+│   ├── utils/                        # Helper functions
+│   │   ├── anpr.py                   # ANPR logic using PaddleOCR (your tested code)
+│   │   ├── vehicle_classifier.py    # YOLOv8 logic for vehicle classification (your tested code)
+│   │   ├── notification.py           # WhatsApp and SMS notification logic
+│   │   ├── location.py               # Retrieve location details for notifications
+│   │   ├── servo_control.py          # Control the servo motor for the boom barrier
+│   │   ├── time_check.py             # Check time constraints for vehicle entry
+│   │   └── sensor.py                 # Ultrasonic sensor integration logic
+│   ├── templates/                    # HTML files
+│   │   ├── base.html                 # Base layout template
+│   │   ├── index.html                # Homepage of the web portal
+│   │   ├── add_vehicle.html          # Form to add vehicle data
+│   │   └── view_vehicles.html        # Display all vehicles in the database
+│   ├── static/                       # Static files
+│   │   ├── css/                      # Stylesheets
+│   │   │   └── styles.css
+│   │   ├── js/                       # JavaScript files
+│   │   │   └── scripts.js
+│   │   └── images/                   # Image assets
+│   ├── database.py                   # SQLite database initialization
+│   └── main.py                       # Entry point to run the application
+│
+├── yolo/                             # YOLOv8 files
+│   ├── coco.names                    # YOLOv8 class labels
+│   └── yolo_utils.py                 # Any utility functions for YOLOv8 (optional)
+│
+├── tests/                            # Test suite
+│   ├── test_anpr.py                  # Unit tests for ANPR
+│   ├── test_yolo.py                  # Unit tests for YOLOv8
+│   ├── test_notifications.py         # Unit tests for notifications
+│   └── test_database.py              # Unit tests for database operations
+│
+├── scripts/                          # Standalone scripts for debugging or setup
+│   ├── setup_database.py             # Script to create and seed the database
+│   ├── test_sensor.py                # Test ultrasonic sensor functionality
+│   └── test_servo.py                 # Test servo motor functionality
+│
+├── logs/                             # Logs directory
+│   └── app.log                       # Log file for debugging and monitoring
+│
+├── requirements.txt                  # Python dependencies
+├── README.md                         # Project documentation
+└── .env                              # Environment variables (API keys, database URI)

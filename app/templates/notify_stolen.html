@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Report Stolen Vehicle</h2>
+<form method="post" action="{{ url_for('vehicle_bp.notify_stolen') }}">
+    {{ form.hidden_tag() }}
+    <div>
+        {{ form.plate_number.label }} {{ form.plate_number }}
+    </div>
+    <button type="submit">Report Stolen</button>
+</form>
+{% endblock %}

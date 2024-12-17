@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Event Logs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+            color: #333;
+        }
+
+        table {
+            width: 90%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .footer {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 0.9em;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <h1>System Event Logs</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Timestamp</th>
+                <th>Event Description</th>
+                <th>Severity</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for log in event_logs %}
+            <tr>
+                <td>{{ log.timestamp }}</td>
+                <td>{{ log.description }}</td>
+                <td>
+                    {% if log.severity == 'critical' %}
+                        <span style="color: red; font-weight: bold;">Critical</span>
+                    {% elif log.severity == 'warning' %}
+                        <span style="color: orange; font-weight: bold;">Warning</span>
+                    {% else %}
+                        <span style="color: green; font-weight: bold;">Info</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="footer">
+        <p>&copy; {{ current_year }} Vehicle Monitoring System. All rights reserved.</p>
+    </div>
+</body>
+</html>

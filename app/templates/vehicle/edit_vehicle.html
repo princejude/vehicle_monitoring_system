@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Edit Vehicle</h2>
+<form method="post" action="{{ url_for('vehicle_bp.edit_vehicle', vehicle_id=vehicle.id) }}">
+    {{ form.hidden_tag() }}
+    <div>
+        {{ form.plate_number.label }}
+        {{ form.plate_number }}
+        {% for error in form.plate_number.errors %}
+            <span class="text-danger">{{ error }}</span>
+        {% endfor %}
+    </div>
+    <div>
+        {{ form.vehicle_type.label }}
+        {{ form.vehicle_type }}
+        {% for error in form.vehicle_type.errors %}
+            <span class="text-danger">{{ error }}</span>
+        {% endfor %}
+    </div>
+    <div>
+        {{ form.status.label }}
+        {{ form.status }}
+        {% for error in form.status.errors %}
+            <span class="text-danger">{{ error }}</span>
+        {% endfor %}
+    </div>
+    <div>
+        {{ form.owner_name.label }}
+        {{ form.owner_name }}
+        {% for error in form.owner_name.errors %}
+            <span class="text-danger">{{ error }}</span>
+        {% endfor %}
+    </div>
+    <div>
+        {{ form.phone_number.label }}
+        {{ form.phone_number }}
+        {% for error in form.phone_number.errors %}
+            <span class="text-danger">{{ error }}</span>
+        {% endfor %}
+    </div>
+    <div>
+        {{ form.address.label }}
+        {{ form.address }}
+        {% for error in form.address.errors %}
+            <span class="text-danger">{{ error }}</span>
+        {% endfor %}
+    </div>
+    <div>
+        {{ form.date_added.label }}
+        {{ form.date_added }}
+        {% for error in form.date_added.errors %}
+            <span class="text-danger">{{ error }}</span>
+        {% endfor %}
+    </div>
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+</form>
+{% endblock %}

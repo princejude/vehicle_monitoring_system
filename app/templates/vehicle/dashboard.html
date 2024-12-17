@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Dashboard</h1>
+
+<!-- User Authentication Section -->
+<div class="user-auth">
+    {% if current_user.is_authenticated %}
+        <p>Welcome, {{ current_user.username }}!</p>
+        <a href="{{ url_for('auth_bp.logout') }}">Logout</a>
+    {% else %}
+        <a href="{{ url_for('auth_bp.login') }}">Login</a>
+    {% endif %}
+</div>
+
+<!-- Summary Overview Section -->
+<div class="summary">
+    <h2>Overview</h2>
+    <ul>
+        <li>Total Vehicles: {{ total_vehicles }}</li>
+        <li>Stolen Vehicles: {{ stolen_vehicles }}</li>
+        <li>Cars: {{ total_cars }}</li>
+        <li>Trucks: {{ total_trucks }}</li>
+        <li>Motorbikes: {{ total_motorbikes }}</li>
+        <li>Buses: {{ total_buses }}</li>
+    </ul>
+</div>
+
+<!-- Generate Reports Section -->
+<div class="reports">
+    <h2>Generate Reports</h2>
+    <p>Download vehicle data as CSV:</p>
+    <ul>
+        <li><a href="{{ url_for('vehicle_bp.generate_report', filter='all') }}">Download All Vehicles</a></li>
+        <li><a href="{{ url_for('vehicle_bp.generate_report', filter='stolen') }}">Download Stolen Vehicles</a></li>
+        <li><a href="{{ url_for('vehicle_bp.generate_report', filter='car') }}">Download Cars</a></li>
+        <li><a href="{{ url_for('vehicle_bp.generate_report', filter='truck') }}">Download Trucks</a></li>
+        <li><a href="{{ url_for('vehicle_bp.generate_report', filter='motorbike') }}">Download Motorbikes</a></li>
+        <li><a href="{{ url_for('vehicle_bp.generate_report', filter='bus') }}">Download Buses</a></li>
+    </ul>
+</div>
+
+<!-- Navigation Links -->
+<div class="actions">
+    <h2>Quick Actions</h2>
+    <ul>
+        <li><a href="{{ url_for('vehicle_bp.add_vehicle') }}">Add New Vehicle</a></li>
+        <li><a href="{{ url_for('vehicle_bp.view_vehicles') }}">View All Vehicles</a></li>
+        <li><a href="{{ url_for('vehicle_bp.search_vehicle') }}">Search for a Vehicle</a></li>
+    </ul>
+</div>
+{% endblock %}

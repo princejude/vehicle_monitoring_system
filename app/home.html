@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Welcome to the Vehicle Monitoring System</h1>
+<p>Monitor, classify, and ensure the safety of vehicles effectively.</p>
+<div class="actions">
+    <a href="{{ url_for('add_vehicle') }}" class="btn">Add Vehicle</a>
+    <a href="{{ url_for('view_vehicles') }}" class="btn">View Vehicles</a>
+    <a href="{{ url_for('notify_stolen') }}" class="btn">Report Stolen Vehicle</a>
+</div>
+{% endblock %}

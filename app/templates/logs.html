@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processed Logs</title>
+</head>
+<body>
+    <h1>Processed Vehicle Logs</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Timestamp</th>
+                <th>Plate Number</th>
+                <th>Vehicle Type</th>
+                <th>Action Taken</th>
+                <th>Image</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for log in logs %}
+            <tr>
+                <td>{{ log.timestamp }}</td>
+                <td>{{ log.plate_number }}</td>
+                <td>{{ log.vehicle_type }}</td>
+                <td>{{ log.action_taken }}</td>
+                <td>
+                    <img src="{{ url_for('processed_image', filename=log.image_path.split('/')[-1]) }}" alt="Vehicle Image" style="width:100px; height:auto;">
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

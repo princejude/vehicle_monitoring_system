@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center">Search Vehicle</h2>
+    <form method="POST" action="{{ url_for('vehicle_bp.search_vehicle') }}" class="mt-4">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            <label for="search_query">Search by Plate Number or Owner's Name:</label>
+            <input
+                type="text"
+                name="search_query"
+                id="search_query"
+                class="form-control"
+                placeholder="Enter plate number or owner's name"
+                required
+            >
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Search</button>
+    </form>
+
+    {% if vehicle %}
+    <div class="card mt-5">
+        <div class="card-header">
+            <h4>Search Results</h4>
+        </div>
+        <div class="card-body">
+            <p><strong>Plate Number:</strong> {{ vehicle.plate_number }}</p>
+            <p><strong>Vehicle Type:</strong> {{ vehicle.vehicle_type }}</p>
+            <p><strong>Status:</strong> {{ vehicle.status }}</p>
+            <p><strong>Owner's Name:</strong> {{ vehicle.owner_name }}</p>
+            <p><strong>Phone Number:</strong> {{ vehicle.phone_number }}</p>
+            <p><strong>Address:</strong> {{ vehicle.address }}</p>
+            <p><strong>Date Added:</strong> {{ vehicle.date_added.strftime('%Y-%m-%d') }}</p>
+        </div>
+    </div>
+    {% elif searched %}
+    <div class="alert alert-warning mt-5" role="alert">
+        No vehicle found matching your search criteria.
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

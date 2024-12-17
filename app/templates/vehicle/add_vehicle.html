@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Add Vehicle</h2>
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <form method="POST" action="">
+                {{ form.hidden_tag() }}
+                
+                <!-- Plate Number -->
+                <div class="mb-3">
+                    <label for="plate_number" class="form-label">Plate Number</label>
+                    {{ form.plate_number(class="form-control", id="plate_number", placeholder="Enter vehicle plate number") }}
+                    {% if form.plate_number.errors %}
+                        <div class="text-danger small mt-1">
+                            {{ form.plate_number.errors[0] }}
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <!-- Vehicle Type -->
+                <div class="mb-3">
+                    <label for="vehicle_type" class="form-label">Vehicle Type</label>
+                    {{ form.vehicle_type(class="form-control", id="vehicle_type") }}
+                    {% if form.vehicle_type.errors %}
+                        <div class="text-danger small mt-1">
+                            {{ form.vehicle_type.errors[0] }}
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <!-- Status -->
+                <div class="mb-3">
+                    <label for="status" class="form-label">Status</label>
+                    {{ form.status(class="form-control", id="status") }}
+                    {% if form.status.errors %}
+                        <div class="text-danger small mt-1">
+                            {{ form.status.errors[0] }}
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <!-- Owner Name -->
+                <div class="mb-3">
+                    <label for="owner_name" class="form-label">Owner Name</label>
+                    {{ form.owner_name(class="form-control", id="owner_name", placeholder="Enter owner name") }}
+                    {% if form.owner_name.errors %}
+                        <div class="text-danger small mt-1">
+                            {{ form.owner_name.errors[0] }}
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <!-- Phone Number -->
+                <div class="mb-3">
+                    <label for="phone_number" class="form-label">Phone Number</label>
+                    {{ form.phone_number(class="form-control", id="phone_number", placeholder="Enter phone number") }}
+                    {% if form.phone_number.errors %}
+                        <div class="text-danger small mt-1">
+                            {{ form.phone_number.errors[0] }}
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <!-- Address -->
+                <div class="mb-3">
+                    <label for="address" class="form-label">Address</label>
+                    {{ form.address(class="form-control", id="address", placeholder="Enter address") }}
+                    {% if form.address.errors %}
+                        <div class="text-danger small mt-1">
+                            {{ form.address.errors[0] }}
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <!-- Date Added -->
+                <div class="mb-3">
+                    <label for="date_added" class="form-label">Date Added</label>
+                    {{ form.date_added(class="form-control", id="date_added") }}
+                    {% if form.date_added.errors %}
+                        <div class="text-danger small mt-1">
+                            {{ form.date_added.errors[0] }}
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <!-- Submit Button -->
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Add Vehicle</button>
+                    <a href="{{ url_for('vehicle_bp.view_vehicles') }}" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
